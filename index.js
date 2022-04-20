@@ -12,15 +12,18 @@ app.get("/holidays", (req,res)=>{
 app.get("/is-today-holiday",(req,res)=>{
     const hoje = new Date();
     const hojeUs = hoje.toLocaleDateString('en-us')
-    console.log(hojeUs)
-    let message = "";
+    let message = "Não, hoje não é feriado";
     for(let i=0; i<holidays.length; i++){
-        if(hojeUs.toString() === holidays[i].date){
-            message = `Sim, hoje é ${holidays[i].name}`
-        } else message = `Não, hoje não é feriado`
+        if(hojeUs !== holidays[i].date){           
+            continue;
+        }    
+        message = `Sim, hoje é ${holidays[i].name}`
+        break
     }
-
+    
     res.send(message)
 })
 
-app.listen(4000);
+app.listen(4000, () => {
+    console.log("Server is running on: http://localhost:4000");
+});
