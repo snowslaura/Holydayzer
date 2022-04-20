@@ -20,9 +20,27 @@ app.get("/is-today-holiday",(req,res)=>{
         message = `Sim, hoje é ${holidays[i].name}`
         break
     }
-    
     res.send(message)
 })
+
+app.get('/holidays/:idMonth', (req, res) => {
+    const month = req.params.idMonth
+
+    const monthHoliday = holidays.filter(
+        (holiday) => {
+            const monthDay = holiday.date.split("/")[0]
+            return monthDay === month            
+        }
+    );
+    
+    if (monthHoliday) {
+        return res.send(monthHoliday);
+    }
+    
+    res.send(`Não há feriado nesse mês`);
+
+  });
+
 
 app.listen(4000, () => {
     console.log("Server is running on: http://localhost:4000");
