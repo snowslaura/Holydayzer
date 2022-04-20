@@ -11,9 +11,11 @@ app.get("/holidays", (req,res)=>{
 
 app.get("/is-today-holiday",(req,res)=>{
     const hoje = new Date();
+    const hojeUs = hoje.toLocaleDateString('en-us')
+    console.log(hojeUs)
     let message = "";
     for(let i=0; i<holidays.length; i++){
-        if(hoje.toLocaleDateString() === holidays[i].date){
+        if(hojeUs.toString() === holidays[i].date){
             message = `Sim, hoje é ${holidays[i].name}`
         } else message = `Não, hoje não é feriado`
     }
