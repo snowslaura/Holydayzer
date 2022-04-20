@@ -33,7 +33,7 @@ app.get('/holidays/:idMonth', (req, res) => {
         }
     );
     
-    if (monthHoliday) {
+    if (monthHoliday.length!==0) {
         return res.send(monthHoliday);
     }
     
